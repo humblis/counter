@@ -377,7 +377,6 @@ document.getElementById('inputBtn').addEventListener('click', function () {
     createTable(data);
 });
 
-
 // 로드 버튼 클릭 이벤트 핸들러
 document.getElementById('loadBtn').addEventListener('click', function () {
     var data = getStoredData();
