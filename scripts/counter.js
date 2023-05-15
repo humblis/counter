@@ -346,19 +346,22 @@ clearCacheButton.textContent = 'Clear Cache';
 clearCacheButton.classList.add('clearCacheBtn');
 //totalAmountElement.parentNode.insertBefore(clearCacheButton, totalAmountElement.previousSibling);
 totalAmountElement.parentNode.insertBefore(clearCacheButton, totalAmountElement.nextSibling);
+
 // 캐시 지우기 버튼 클릭 이벤트 핸들러
 clearCacheButton.addEventListener('click', function () {
-  if (caches && caches.keys) {
-    caches.keys().then(function (cacheNames) {
-      cacheNames.forEach(function (cacheName) {
-        caches.delete(cacheName);
+    if (caches && caches.keys) {
+      caches.keys().then(function (cacheNames) {
+        cacheNames.forEach(function (cacheName) {
+          caches.delete(cacheName);
+        });
       });
-    });
-  }
-});
-
+    }
+    
+    // 페이지 리플레시
+    location.reload();
+  });
+  
 // 입력 버튼 클릭 이벤트 핸들러
-
 document.getElementById('inputBtn').addEventListener('click', function () {
     var inputValue = document.getElementById('inputBtn').innerText;
     var amount = parseInt(inputValue + '00');
