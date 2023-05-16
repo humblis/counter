@@ -299,7 +299,7 @@ function createTable(data) {
         downloadData();
     });
 
-    
+
     // 표 정렬
     function sortTable(columnName) {
         var table = document.getElementById('dataTable');
@@ -350,25 +350,30 @@ totalAmountElement.parentNode.insertBefore(clearCacheButton, totalAmountElement.
 // 캐시 지우기 버튼 클릭 이벤트 핸들러
 clearCacheButton.addEventListener('click', function () {
     if (caches && caches.keys) {
-      caches.keys().then(function (cacheNames) {
-        cacheNames.forEach(function (cacheName) {
-          caches.delete(cacheName);
+        caches.keys().then(function (cacheNames) {
+            cacheNames.forEach(function (cacheName) {
+                caches.delete(cacheName);
+            });
         });
-      });
     }
-    
+
     // 페이지 리플레시
     location.reload();
-  });
-  
+});
+
 // 입력 버튼 클릭 이벤트 핸들러
 document.getElementById('inputBtn').addEventListener('click', function () {
     var inputValue = document.getElementById('inputBtn').innerText;
     var amount = parseInt(inputValue + '00');
     var createdAt = getCurrentTimestamp();
     var data = getStoredData();
+
+    // 새로운 데이터의 인덱스 정하기
+    var newIndex = data.reduce(function (maxIndex, item) {
+        return Math.max(maxIndex, item.index);
+    }, 0) + 1;
     var newData = {
-        index: data.length + 1,
+        index: newIndex,
         name: '',
         amount: amount,
         createdAt: createdAt,
